@@ -683,25 +683,29 @@
                         <br><br>
                         <strong>Contáctanos sin compromiso.</strong> Escuchamos, entendemos tu negocio y te proponemos soluciones reales.
                     </p>
-                    <form
-                        action="https://formspree.io/f/xvgbowwg"
-                        method="POST"
-                        id="contactForm"
-                        class="space-y-6">
-                        <div>
-                            <input type="text" name="name" placeholder="Tu nombre y apellido" required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
-                        </div>
-                        <div>
-                            <input type="email" name="email" placeholder="Tu correo" required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
-                        </div>
-                        <div>
-                            <textarea name="message" rows="5" placeholder="Cuéntanos sobre tu proyecto..." required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400"></textarea>
-                        </div>
-                        <input type="hidden" name="_gotcha" style="display:none" />
-                        <button type="submit" class="w-full flex items-center justify-center px-6 py-3 btn-primary rounded-md font-medium text-white transition-all duration-300">
-                            <span id="submitText">Enviar Mensaje</span>
-                            <span class="loading-spinner ml-2 hidden loading"><i class="fas fa-spinner"></i></span>
-                        </button>
+                   <form
+                      action="https://formspree.io/f/xvgbowwg"
+                      method="POST"
+                      class="space-y-6"
+                    >
+                      <div>
+                        <input type="text" name="name" placeholder="Tu nombre y apellido" required 
+                          class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
+                      </div>
+                      <div>
+                        <input type="email" name="email" placeholder="Tu correo" required 
+                          class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
+                      </div>
+                      <div>
+                        <textarea name="message" rows="5" placeholder="Cuéntanos sobre tu proyecto..." required 
+                          class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400"></textarea>
+                      </div>
+                      <!-- anti bot -->
+                      <input type="text" name="_gotcha" style="display:none">
+                    
+                      <button type="submit" class="w-full flex items-center justify-center px-6 py-3 btn-primary rounded-md font-medium text-white transition-all duration-300">
+                        <span>Enviar Mensaje</span>
+                      </button>
                     </form>
                     <div id="successAlert" class="alert-success bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-4 flex justify-between items-center">
                         <div>
@@ -924,3 +928,4 @@
 </body>
 
 </html>
+
