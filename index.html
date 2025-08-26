@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acrux - Agencia de Marketing Digital | Hacemos brillar tu presencia digital</title>
+    <meta name="description" content="Agencia de marketing digital joven y creativa. Ofrecemos planes de marketing, branding, redes sociales, desarrollo web y publicidad digital con resultados reales. Fundada en 2025.">
+    <meta name="keywords" content="marketing digital, agencia marketing, branding, desarrollo web, redes sociales, publicidad digital, Acrux, agencia digital Argentina">
+    <meta name="author" content="Acrux Digital">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#5722D2">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acruxdigital.com">
+    <meta property="og:title" content="Acrux - Agencia de Marketing Digital">
+    <meta property="og:description" content="Hacemos brillar tu presencia digital con estrategias creativas, humanas y orientadas a resultados.">
+    <meta property="og:image" content="https://placehold.co/1200x630/5722D2/FFFFFF?text=Acrux+Agencia">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Acrux Digital">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://acruxdigital.com">
+    <meta property="twitter:title" content="Acrux - Agencia de Marketing Digital">
+    <meta property="twitter:description" content="Hacemos brillar tu presencia digital con estrategias creativas, humanas y orientadas a resultados.">
+    <meta property="twitter:image" content="https://placehold.co/1200x630/5722D2/FFFFFF?text=Acrux+Agencia">
+    <!-- Favicon -->
+    <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+        }
+        /* Animaciones personalizadas */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(87, 34, 210, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(87, 34, 210, 0.6); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        /* Botón mejorado */
+        .btn-primary {
+            background: linear-gradient(135deg, #5722D2 0%, #9226AD 100%);
+            box-shadow: 0 4px 15px rgba(87, 34, 210, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            min-height: 50px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(87, 34, 210, 0.4);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        /* Formulario mejorado */
+        .form-input {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #5722D2;
+            box-shadow: 0 0 0 3px rgba(87, 34, 210, 0.3);
+            transform: scale(1.02);
+        }
+        /* Alerta de éxito */
+        .alert-success {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .alert-success.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Loading */
+        .loading {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .loading.active {
+            opacity: 1;
+            height: auto;
+            margin-top: 16px;
+        }
+        @keyframes loading {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-spinner {
+            animation: loading 1s linear infinite;
+        }
+        /* Servicios */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(87, 34, 210, 0.2);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            will-change: transform, box-shadow;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(87, 34, 210, 0.1) 0%, rgba(146, 38, 173, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        .service-card:hover::before {
+            opacity: 0.3;
+        }
+        .service-active {
+            transform: scale(1.08) translateY(-15px) !important;
+            box-shadow: 0 35px 70px rgba(87, 34, 210, 0.3), 0 0 0 4px rgba(87, 34, 210, 0.5) !important;
+            background: linear-gradient(135deg, #5722D2 0%, #9226AD 100%) !important;
+            color: white !important;
+            z-index: 10 !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(20px) !important;
+        }
+        .service-active h3, .service-active p {
+            color: white !important;
+        }
+        .service-active .text-purple-600, .service-active .text-gray-700 {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .service-blur {
+            filter: blur(4px) grayscale(0.3) brightness(0.7);
+            opacity: 0.4;
+            pointer-events: none;
+            transform: scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-description {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 8px;
+            margin-top: 0;
+        }
+        .service-active .service-description {
+            max-height: none;
+            opacity: 1;
+            margin-top: 1.5rem;
+            overflow: visible;
+        }
+        .service-toggle {
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 8px;
+            color: #5722D2 !important;
+        }
+        .service-active .service-toggle {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .service-toggle:hover {
+            transform: translateX(5px);
+        }
+        /* Cursor personalizado */
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        /* Animación de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Navbar sticky */
+        nav {
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(87, 34, 210, 0.1);
+        }
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            border-top: 1px solid rgba(87, 34, 210, 0.2);
+        }
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(34, 180, 80, 0.4);
+            border-radius: 50%;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 30px rgba(34, 180, 80, 0.6);
+        }
+        /* Optimización móvil */
+        @media (max-width: 640px) {
+            .mobile-cta {
+                padding: 14px 24px !important;
+                font-size: 16px !important;
+                min-height: 50px;
+            }
+            .service-active {
+                transform: scale(1.05) translateY(-10px) !important;
+            }
+            .service-card {
+                margin-bottom: 1rem;
+            }
+            .contact-info {
+                margin-top: 2rem;
+            }
+            .service-description {
+                max-height: none !important;
+            }
+            .service-toggle {
+                font-size: 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Iconos */
+        .icon-animate {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .icon-animate {
+            transform: scale(1.1) rotate(5deg);
+        }
+        /* Equipo */
+        .team-member {
+            transition: all 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(87, 34, 210, 0.2);
+        }
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Tooltip en footer */
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #5722D2;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        /* Estrella decorativa */
+        .star-bg {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%235722D2%22 d=%22M50 2L65.09 8.26L72 9.27L67 14.14L68.18 21.02L62 17.77L55.82 21.02L57 14.14L52 9.27L58.91 8.26L50 2Z%22/></svg>') no-repeat center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        /* Animación de scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Botón de solicitud mejorado */
+        .service-contact-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        .service-contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(87, 34, 210, 0.4);
+        }
+        /* Animación de resaltado */
+        .highlight-contact {
+            animation: highlight 1.5s ease-in-out;
+        }
+        @keyframes highlight {
+            0% { box-shadow: 0 0 0 0 rgba(87, 34, 210, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(87, 34, 210, 0.2); }
+            100% { box-shadow: 0 0 0 0 rgba(87, 34, 210, 0.4); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-black text-white overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="bg-black fixed w-full top-0 z-50 transition-all duration-300 ease-in-out">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 sm:h-20 items-center">
+                <a href="#" class="flex items-center font-cinzel text-2xl font-bold text-white hover:text-purple-400 transition-colors duration-300 transform hover:scale-105">
+                    ACRUX
+                </a>
+                <div class="flex items-center">
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#nosotros" class="border-transparent text-gray-300 hover:text-white hover:border-purple-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300 ease-in-out">Nosotros</a>
+                        <a href="#hacemos-brillar" class="border-transparent text-gray-300 hover:text-white hover:border-purple-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300 ease-in-out">Hacemos Brillar</a>
+                        <a href="#servicios" class="border-transparent text-gray-300 hover:text-white hover:border-purple-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300 ease-in-out">Servicios</a>
+                        <a href="#contacto" class="border-transparent text-black bg-purple-500 hover:bg-purple-400 hover:text-black inline-flex items-center px-4 py-2 rounded font-semibold shadow transition-all duration-300 ease-in-out border-b-2 border-purple-500 hover:border-purple-400 transform hover:scale-105">Contacto</a>
+                    </div>
+                    <div class="flex items-center sm:hidden">
+                        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#nosotros" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:border-purple-500">Nosotros</a>
+                <a href="#hacemos-brillar" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:border-purple-500">Hacemos Brillar</a>
+                <a href="#servicios" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-300 hover:text-white hover:border-purple-500">Servicios</a>
+                <a href="#contacto" class="block pl-3 pr-4 py-2 border-l-4 border-purple-500 text-base font-semibold text-white bg-purple-500 rounded hover:bg-purple-400">Contacto</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero -->
+    <section class="pt-24 sm:pt-28 pb-16 sm:pb-24 bg-gradient-to-r from-purple-900 to-purple-600 relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="star-bg top-20 left-10 animate-float opacity-20"></div>
+            <div class="star-bg bottom-32 right-20 animate-float" style="animation-delay: 1s"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+                <div class="lg:col-span-6 flex flex-col justify-center fade-in">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
+                        <span class="block">Hacemos brillar</span>
+                        <span class="block text-purple-200">tu presencia digital</span>
+                    </h1>
+                    <p class="mt-6 text-base sm:text-lg md:text-xl text-purple-100 mb-8">
+                        Somos Acrux, una agencia joven y apasionada. Convertimos tu visión en una estrategia digital poderosa, con creatividad, tecnología y un trato humano.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="#contacto" class="w-full flex items-center justify-center px-6 sm:px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-500 hover:bg-purple-400 md:py-4 md:text-lg md:px-10 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary mobile-cta">
+                            ¡Quiero hacer brillar mi marca!
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-8 sm:mt-12 lg:mt-0 lg:col-span-6 flex items-center justify-center fade-in animate-float">
+                    <video src="video-acrux.mp4" class="w-full max-w-md lg:max-w-lg rounded-lg shadow-xl" autoplay muted loop></video>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Nosotros1 -->
+    <section id="nosotros" class="py-16 sm:py-24 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="star-bg top-10 right-10 opacity-10 animate-float"></div>
+            <div class="star-bg bottom-20 left-1/4 opacity-10 animate-float" style="animation-delay: 2s"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                <div class="lg:col-span-6 fade-in">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">¿Quiénes somos?</h2>
+                    <p class="text-gray-600 mb-4 text-base sm:text-lg leading-relaxed text-justify">
+                        Somos Acrux, una agencia joven fundada en 2025 por profesionales apasionados por el marketing digital y el diseño. Convertimos tu visión en una estrategia digital poderosa, con creatividad, tecnología y un trato humano.
+                    </p>
+                    <p class="text-gray-600 mb-4 text-base sm:text-lg leading-relaxed text-justify">
+                        Nuestro nombre se inspira en Acrux, la estrella más brillante de la Cruz del Sur, utilizada por navegantes para orientarse. Así como ellos, guiamos tu marca con claridad y propósito en el mundo digital.
+                    </p>
+                </div>
+                <div class="mt-8 sm:mt-12 lg:mt-0 lg:col-span-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-purple-50 p-6 rounded-lg fade-in" style="animation-delay: 0.1s">
+                            <h3 class="text-xl font-semibold text-purple-800 mb-2">Misión</h3>
+                            <p class="text-gray-700 leading-relaxed">Guiar y potenciar marcas con estrategias innovadoras y orientadas a resultados.</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg fade-in" style="animation-delay: 0.2s">
+                            <h3 class="text-xl font-semibold text-purple-800 mb-2">Valores</h3>
+                            <p class="text-gray-700 leading-relaxed">Confianza, Creatividad, Estrategia, Profesionalismo y Cercanía.</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg fade-in" style="animation-delay: 0.3s">
+                            <h3 class="text-xl font-semibold text-purple-800 mb-2">Visión</h3>
+                            <p class="text-gray-700 leading-relaxed">Ser la brújula digital de las marcas que buscan crecer con propósito.</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg fade-in" style="animation-delay: 0.4s">
+                            <h3 class="text-xl font-semibold text-purple-800 mb-2">Nuestro Equipo</h3>
+                            <div class="space-y-1 text-gray-700">
+                                <p>Francisco Laplaca</p>
+                                <p>Enzo Banega</p>
+                                <p>Karen Ramirez</p>
+                                <p>Patricio Ramirez</p>
+                                <p>Santiago Ramirez</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hacemos Brillar -->
+    <section id="hacemos-brillar" class="py-16 sm:py-24 bg-gradient-to-r from-purple-900 to-purple-600 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">Hacemos brillar tu marca</h2>
+                <p class="text-purple-100 max-w-2xl mx-auto text-base sm:text-lg">Transformamos tu presencia digital en una experiencia memorable.</p>
+            </div>
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-purple-800 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group fade-in">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center relative overflow-hidden icon-animate">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                        <div class="absolute inset-0 bg-white opacity-10 rounded-full animate-spin"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Impacto</h3>
+                    <p class="text-purple-200 leading-relaxed">Marcas que no pasan desapercibidas.</p>
+                </div>
+                <div class="bg-purple-800 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group fade-in" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center relative overflow-hidden icon-animate">
+                        <i class="fas fa-handshake text-white text-2xl"></i>
+                        <div class="absolute inset-0 bg-white opacity-10 rounded-full animate-spin"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Resultados</h3>
+                    <p class="text-purple-200 leading-relaxed">Transparencia y resultados reales.</p>
+                </div>
+                <div class="bg-purple-800 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group fade-in" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center relative overflow-hidden icon-animate">
+                        <i class="fas fa-rocket text-white text-2xl"></i>
+                        <div class="absolute inset-0 bg-white opacity-10 rounded-full animate-spin"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Crecimiento</h3>
+                    <p class="text-purple-200 leading-relaxed">Soluciones que escalan contigo.</p>
+                </div>
+                <div class="bg-purple-800 p-6 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group fade-in" style="animation-delay: 0.4s">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center relative overflow-hidden icon-animate">
+                        <i class="fas fa-heart text-white text-2xl"></i>
+                        <div class="absolute inset-0 bg-white opacity-10 rounded-full animate-spin"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Cercanía</h3>
+                    <p class="text-purple-200 leading-relaxed">Tu proyecto es nuestro proyecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Servicios -->
+    <section id="servicios" class="py-16 sm:py-24 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Nuestros Servicios</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg">Soluciones integrales para que tu marca brille en el mundo digital.</p>
+            </div>
+            <div id="servicios-list" class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Plan de Marketing -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="plan-marketing">
+                    <i class="fas fa-rocket text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Planes de Marketing Digital</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Diseñamos estrategias a medida que alinean tus objetivos con tu audiencia para impulsar el crecimiento de tu negocio.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Desarrollamos planes de marketing digital completos y medibles, adaptados a tu negocio. Analizamos tu mercado, definimos tu público objetivo, establecemos objetivos claros y creamos un roadmap estratégico para alcanzarlos.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Análisis de mercado y competencia</li>
+                            <li>Definición de objetivos SMART</li>
+                            <li>Estrategia de contenidos y canales</li>
+                            <li>Plan de acción mensual</li>
+                            <li>Presupuesto y KPIs</li>
+                        </ul>
+                        <p class="mb-3">🔎 Incluye reportes mensuales con análisis y optimización.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gestión de Redes -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="gestion-redes" style="animation-delay: 0.1s">
+                    <i class="fas fa-hashtag text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Gestión Estratégica de Redes Sociales</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Administramos tus redes con contenido estratégico que conecta y genera comunidad. Trabajamos en Instagram, Facebook, TikTok, LinkedIn y más.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Gestionamos tus redes sociales con contenido estratégico y creativo que conecta con tu audiencia. Trabajamos en Instagram, Facebook, LinkedIn, TikTok y otras plataformas relevantes para tu negocio, desarrollando una voz de marca auténtica y consistente.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Calendario editorial</li>
+                            <li>Diseño gráfico y producción de videos</li>
+                            <li>Community management</li>
+                            <li>Publicidad en Meta Ads</li>
+                            <li>Reportes y métricas</li>
+                        </ul>
+                        <p class="mb-3">📲 Nuestro foco: engagement, alcance y conversión.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Branding -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="branding" style="animation-delay: 0.2s">
+                    <i class="fas fa-paint-brush text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Branding y Rebranding</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Creamos o renovamos tu identidad de marca con un concepto sólido que refleje tu esencia y te diferencie.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Desarrollamos tu identidad visual y estratégica desde cero o la renovamos si ya tienes una marca. Creamos un concepto sólido que refleje tu esencia, valores y propuesta de valor.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Misión, visión y valores</li>
+                            <li>Posicionamiento y arquitectura de marca</li>
+                            <li>Nombre, eslogan y storytelling</li>
+                            <li>Identidad visual (logo, colores, tipografía)</li>
+                            <li>Manual de marca y aplicaciones</li>
+                        </ul>
+                        <p class="mb-3">✨ Una marca fuerte inspira confianza y fideliza clientes.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sitios Web -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="sitios-web" style="animation-delay: 0.3s">
+                    <i class="fas fa-code text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Desarrollo Web y E-Commerce</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Diseñamos sitios web y tiendas online modernos, rápidos y optimizados para convertir.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Creamos sitios web y tiendas online modernos, responsivos y con experiencia de usuario excepcional. Usamos tecnologías actuales para garantizar velocidad, seguridad y escalabilidad.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Diseño UX/UI</li>
+                            <li>WordPress, Shopify o desarrollo a medida</li>
+                            <li>SEO y velocidad optimizada</li>
+                            <li>Pasarelas de pago y CRM</li>
+                            <li>Soporte y mantenimiento</li>
+                        </ul>
+                        <p class="mb-3">💻 Tu web, más que presencia: una herramienta de ventas.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Creación de Contenidos -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="creacion-contenidos" style="animation-delay: 0.4s">
+                    <i class="fas fa-camera text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Creación de Contenidos</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Generamos piezas creativas y efectivas que atraen y posicionan tu marca en el mercado.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Producimos contenido de alta calidad que atrae, educa y convierte a tu audiencia. Nuestro equipo combina creatividad, conocimiento del mercado y estrategia digital para crear piezas efectivas que posicionan tu marca como referente en tu industria.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Redacción para web y redes</li>
+                            <li>Fotografía y edición</li>
+                            <li>Video</li>
+                            <li>Guiones para reels y videos</li>
+                            <li>Copywriting persuasivo</li>
+                        </ul>
+                        <p class="mb-3">🎯 Contenido que inspira, emociona y convierte.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Publicidad Digital -->
+                <div class="bg-purple-50 p-6 rounded-lg service-card cursor-pointer transition-all duration-300 hover:shadow-xl fade-in" data-service="publicidad-digital" style="animation-delay: 0.5s">
+                    <i class="fas fa-bullhorn text-purple-600 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Publicidad Digital</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Transformamos tu inversión en campañas que generan resultados reales.</p>
+                    <button class="service-toggle text-purple-600 font-medium flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                        <span>Ver más</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="service-description mt-4 text-gray-700 hidden leading-relaxed">
+                        <p class="mb-3">Gestionamos campañas publicitarias en Meta (Facebook e Instagram) y Google Ads para maximizar tu retorno de inversión. Nuestro enfoque combina creatividad, segmentación precisa y optimización constante para generar resultados tangibles.</p>
+                        <ul class="list-disc list-inside mb-3">
+                            <li>Creación y gestión estratégica</li>
+                            <li>Segmentación avanzada</li>
+                            <li>Pruebas A/B y optimización diaria</li>
+                            <li>Retargeting y remarketing</li>
+                            <li>Reportes y ROI</li>
+                        </ul>
+                        <p class="mb-3">🚀 Más tráfico, más leads, más ventas.</p>
+                        <div class="mt-4">
+                            <a href="#contacto" class="service-contact-btn inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                                Solicitar Información
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contacto -->
+    <section id="contacto" class="py-16 sm:py-24 bg-gradient-to-r from-purple-900 to-purple-600 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-8">
+                <div class="lg:col-span-6 fade-in">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">Hablemos de tu proyecto</h2>
+                    <p class="text-purple-100 mb-8 text-base sm:text-lg leading-relaxed">
+                        ¿Tenes una idea y no sabes por dónde empezar? ¿O ya tenes un proyecto en marcha y necesitas potenciarlo? 
+                        <br><br>
+                        <strong>Contáctanos sin compromiso.</strong> Escuchamos, entendemos tu negocio y te proponemos soluciones reales.
+                    </p>
+                    <form
+                        action="https://formspree.io/f/mkgzeqvw"
+                        method="POST"
+                        id="contactForm"
+                        class="space-y-6">
+                        <div>
+                            <input type="text" name="name" placeholder="Tu nombre y apellido" required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
+                        </div>
+                        <div>
+                            <input type="email" name="email" placeholder="Tu correo" required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400">
+                        </div>
+                        <div>
+                            <textarea name="message" rows="5" placeholder="Cuéntanos sobre tu proyecto..." required class="w-full px-4 py-3 rounded-md form-input text-white placeholder-gray-400"></textarea>
+                        </div>
+                        <input type="hidden" name="_gotcha" style="display:none" />
+                        <button type="submit" class="w-full flex items-center justify-center px-6 py-3 btn-primary rounded-md font-medium text-white transition-all duration-300">
+                            <span id="submitText">Enviar Mensaje</span>
+                            <span class="loading-spinner ml-2 hidden loading"><i class="fas fa-spinner"></i></span>
+                        </button>
+                    </form>
+                    <div id="successAlert" class="alert-success bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-4 flex justify-between items-center">
+                        <div>
+                            <strong class="font-bold">¡Listo!</strong>
+                            <span class="block sm:inline"> Pronto nos pondremos en contacto con vos.</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-700 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="this.parentElement.classList.remove('show')">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-8 sm:mt-12 lg:mt-0 lg:col-span-6 contact-info fade-in">
+                    <div class="bg-purple-800 p-6 sm:p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-white mb-6">¿Cómo contactarnos?</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-purple-200 text-xl mt-1"></i>
+                                <div class="ml-3">
+                                    <p class="text-purple-100">Ubicación</p>
+                                    <p class="text-white">Córdoba, Argentina</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope text-purple-200 text-xl mt-1"></i>
+                                <div class="ml-3">
+                                    <p class="text-purple-100">Email</p>
+                                    <p class="text-white">acruxdigitalmkt@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone text-purple-200 text-xl mt-1"></i>
+                                <div class="ml-3">
+                                    <p class="text-purple-100">WhatsApp</p>
+                                    <p class="text-white">+54 9 3516560028</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 p-4 bg-purple-900/30 rounded-lg">
+                            <p class="text-purple-100 text-sm text-center">
+                                <i class="fas fa-lightbulb text-yellow-300 mr-2"></i>
+                                Respondemos en menos de 24 horas hábiles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:divide-x md:divide-purple-800">
+                <!-- Columna ACRUX -->
+                <div class="px-0 md:px-6">
+                    <span class="text-2xl font-bold text-purple-800 mb-4 block">ACRUX</span>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Inspirados en la estrella que guía a los navegantes. Tu brújula digital.
+                    </p>
+                </div>
+                <!-- Columna Redes Sociales -->
+                <div class="px-0 md:px-6">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-4">Síguenos</h3>
+                    <div class="flex space-x-6 mb-2">
+                        <a href="https://instagram.com/acruxagency" target="_blank" class="text-purple-600 hover:text-purple-800"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61579183091214" target="_blank" class="text-purple-600 hover:text-purple-800"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="https://linkedin.com/company/acruxdigitalmkt" target="_blank" class="text-purple-600 hover:text-purple-800"><i class="fab fa-linkedin text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-600 text-sm">Inspiración, casos y novedades.</p>
+                </div>
+            </div>
+            <div class="mt-10 pt-8 border-t border-purple-800">
+                <p class="text-center text-gray-500 text-sm">&copy; 2025 Acrux. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/5493516560028" target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-green-500 text-white rounded-full p-3 shadow-lg transition-all duration-300 ease-in-out whatsapp-float hover:scale-110"
+        aria-label="Chat en WhatsApp" title="¡Escríbenos por WhatsApp!">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Fade-in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitText = document.getElementById('submitText');
+            const loadingSpinner = document.querySelector('.loading-spinner');
+            const successAlert = document.getElementById('successAlert');
+            submitText.textContent = 'Enviando...';
+            loadingSpinner.classList.remove('hidden');
+            loadingSpinner.classList.add('active');
+            setTimeout(() => {
+                this.reset();
+                submitText.textContent = 'Enviar Mensaje';
+                loadingSpinner.classList.add('hidden');
+                loadingSpinner.classList.remove('active');
+                successAlert.classList.add('show');
+            }, 2000);
+        });
+
+        // Cerrar alerta
+        document.getElementById('successAlert').addEventListener('click', function(e) {
+            if (e.target.closest('svg')) {
+                this.classList.remove('show');
+            }
+        });
+
+        // Manejo de servicios - CORREGIDO
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviciosList = document.getElementById('servicios-list');
+            if (!serviciosList) return;
+
+            const allCards = serviciosList.querySelectorAll('.service-card');
+            let activeCard = null;
+
+            allCards.forEach(card => {
+                const description = card.querySelector('.service-description');
+                const toggleBtn = card.querySelector('.service-toggle');
+
+                // Clic en cualquier parte de la card (excepto en el botón)
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.service-toggle')) return;
+
+                    if (card === activeCard) {
+                        // Desactivar si ya está activa
+                        card.classList.remove('service-active');
+                        description.classList.add('hidden');
+                        activeCard = null;
+                        allCards.forEach(c => c.classList.remove('service-blur'));
+                    } else {
+                        // Desactivar la anterior
+                        if (activeCard) {
+                            activeCard.classList.remove('service-active');
+                            activeCard.querySelector('.service-description').classList.add('hidden');
+                        }
+
+                        // Activar nueva
+                        allCards.forEach(c => c.classList.add('service-blur'));
+                        card.classList.remove('service-blur');
+                        card.classList.add('service-active');
+                        description.classList.remove('hidden');
+                        activeCard = card;
+
+                        // Scroll suave al card
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+
+                // Clic en el botón "Ver más/menos"
+                toggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Evitar que active el clic en la card
+                    card.click(); // Reutilizamos la lógica del clic en la card
+                });
+            });
+
+            // Cerrar al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (activeCard && !activeCard.contains(e.target)) {
+                    activeCard.classList.remove('service-active');
+                    activeCard.querySelector('.service-description').classList.add('hidden');
+                    allCards.forEach(c => c.classList.remove('service-blur'));
+                    activeCard = null;
+                }
+            });
+            
+            // Manejo de botones de contacto
+            document.querySelectorAll('.service-contact-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Scroll suave al formulario de contacto
+                    const contactSection = document.getElementById('contacto');
+                    if (contactSection) {
+                        // Resaltar sección de contacto
+                        contactSection.classList.add('highlight-contact');
+                        
+                        // Scroll suave con animación
+                        contactSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Quitar clase de resaltado después de la animación
+                        setTimeout(() => {
+                            contactSection.classList.remove('highlight-contact');
+                        }, 1500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
